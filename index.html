@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <main id="main">
+      <h1 class="mainTitle">Notion-like Text Editor</h1>
+      <div class="inputWrapper">
+        <div
+          contenteditable
+          placeholder="Type '/' for commands"
+          class="inputField"
+          type="text"
+          id="0"
+        ></div>
+      </div>
+      <!-- new lines and changes should come here -->
+      <!-- so they must be appended to the main id -->
+      <!-- modal starts here -->
+
+      <!-- <button id="open">click me</button> -->
+      <div class="modal-container" id="modal_container">
+        <div class="modal">
+          <section id="basicBlocks" class="sectionDivider">
+            <h3 class="sectionTitle">Basic Blocks</h3>
+            <!-- basic blocks items come here via JS -->
+          </section>
+          <!-- basic blocks ends here -->
+        </div>
+      </div>
+      <!-- modal ends here -->
+    </main>
+  </body>
+  <script type="module" src="app.js"></script>
+</html>
