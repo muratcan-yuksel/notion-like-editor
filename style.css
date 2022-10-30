@@ -52,10 +52,6 @@ button {
   font-size: 14px;
 }
 .modal-container {
-  /* display: none; */
-  /* position: relative;
-    top: 0;
-    left: 0;*/
   width: auto;
   height: auto;
   background: rgba(0, 0, 0, 0.5);

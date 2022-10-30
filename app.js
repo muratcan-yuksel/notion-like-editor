@@ -64,18 +64,12 @@ function keydownFunction(event) {
   }
 }
 
-const newElementAttributes = (
-  elementType,
-  elementClass,
-  elementPlaceholder,
-  elementClassTwo
-) => {
+const defineAttributes = (elementType, elementClass) => {
   const newinputField = document.createElement(elementType);
-  newinputField.classList.add(elementClass, elementClassTwo);
+  newinputField.classList.add(elementClass);
   newinputField.setAttribute("id", uid());
   newinputField.setAttribute("type", "text");
   newinputField.contentEditable = "true";
-  newinputField.setAttribute("placeholder", elementPlaceholder);
   inputWrapper.appendChild(newinputField);
   //add focus to the newly created input field and get the id of the focused element
   newinputField.focus();
@@ -85,7 +79,7 @@ const newElementAttributes = (
 
 //create a new input field and append it to the inputWrapper class
 function createInputField() {
-  newElementAttributes("div", "inputField");
+  defineAttributes("div", "inputField");
   modal_container.classList.remove("show");
   addKeydownFunctionToInputFields();
 }
@@ -93,15 +87,13 @@ function createInputField() {
 function createNewElement() {
   console.log(modalItemById);
   if (modalItemById == "itemH1") {
-    newElementAttributes("h1", "inputField", "Heading 1");
+    defineAttributes("h1", "inputField");
   } else if (modalItemById == "itemH2") {
-    newElementAttributes("h2", "inputField", "Heading 2");
+    defineAttributes("h2", "inputField");
   } else if (modalItemById == "itemH3") {
-    newElementAttributes("h3", "inputField", "Heading 3");
+    defineAttributes("h3", "inputField");
   } else if (modalItemById == "itemText") {
-    newElementAttributes("p", "inputField", "Type '/' for commands");
-  } else if (modalItemById == "itemQuote") {
-    newElementAttributes("p", "inputField", "Empty quote", "quotes");
+    defineAttributes("p", "inputField");
   }
   // const elementType=
   modal_container.classList.remove("show");
@@ -114,26 +106,8 @@ function addKeydownFunctionToInputFields() {
   inputField.forEach((input) => {
     input.addEventListener("keydown", keydownFunction);
     input.addEventListener("click", getId);
-    //trying to make it work for the mobile devices
-    input.addEventListener("input", mobileKeydown);
-
-    function mobileKeydown() {
-      if (input.textContent.includes("/")) {
-        modal_container.classList.add("show");
-        modalOpen = true;
-        addKeydownFunctionToInputFields;
-        //the following else if doesn't work
-        //because textContent isn't only "/" but also contains a break line
-      } else if (input.textContent.includes("/") && input.textContent == "/") {
-        modal_container.classList.add("show");
-        modalOpen = true;
-        input.textContent = "";
-        addKeydownFunctionToInputFields;
-      }
-    }
 
     console.log(input);
-    // console.log(Array.from(inputField).indexOf(input));
   });
   console.log(inputField);
 }
@@ -146,17 +120,6 @@ function getId() {
   console.log(id);
   console.log(this.className);
   currentInputFieldById = id;
-  handleChosenElementPlaceholder();
-}
-
-function handleChosenElementPlaceholder() {
-  let chosenElement = document.getElementById(currentInputFieldById);
-  if (chosenElement.innerHTML == "Type '/' for commands") {
-    chosenElement.innerHTML = "";
-  } else if (chosenElement.innerHTML != "Type '/' for commands") {
-    return;
-  }
-  chosenElement.classList.remove("inputBeforeClick");
 }
 
 //close modal if escape key is clicked
@@ -201,22 +164,8 @@ let itemId;
 listItems.forEach((item) => {
   console.log(item);
   item.addEventListener("click", (e) => {
-    if (
-      e.target.classList.contains("listItemTitle") ||
-      e.target.classList.contains("listItemPara")
-    ) {
-      console.log(e.target.parentElement.parentElement.id);
-      itemId = e.target.parentElement.parentElement.id;
-    } else if (
-      e.target.classList.contains("listItemDivider") ||
-      e.target.classList.contains("icon")
-    ) {
-      console.log(e.target.parentElement.id);
-      itemId = e.target.parentElement.id;
-    } else {
-      console.log(e.target.id);
-      itemId = e.target.id;
-    }
+    console.log(e.target.id);
+    itemId = e.target.id;
     console.log(itemId + " is item id");
     modalItemById = itemId;
     modal_container.classList.remove("show");
@@ -224,4 +173,39 @@ listItems.forEach((item) => {
     inputField = document.querySelectorAll(".inputField");
     addKeydownFunctionToInputFields();
   });
+});
+//move cursor functionality
+
+let cursorItems = document.querySelectorAll(".listItem");
+let selectedItem;
+let index = -1;
+
+document.addEventListener("keydown", (e) => {
+  if (e.key === "ArrowDown") {
+    console.log("down");
+    if (index < cursorItems.length - 1) {
+      index++;
+      console.log(index);
+      selectedItem = cursorItems[index];
+      console.log(selectedItem);
+      console.log(selectedItem.id);
+      modalItemById = selectedItem.id;
+      selectedItem.classList.add("selected");
+      selectedItem.previousElementSibling.classList.remove("selected");
+      selectedItem.scrollIntoView({ block: "center", behavior: "smooth" });
+    }
+  } else if (e.key === "ArrowUp") {
+    console.log("up");
+    if (index > 0) {
+      index--;
+      console.log(index);
+      selectedItem = cursorItems[index];
+      console.log(selectedItem);
+      console.log(selectedItem.id);
+      modalItemById = selectedItem.id;
+      selectedItem.classList.add("selected");
+      selectedItem.nextElementSibling.classList.remove("selected");
+      selectedItem.scrollIntoView({ block: "center", behavior: "smooth" });
+    }
+  }
 });
