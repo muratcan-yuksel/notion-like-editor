@@ -62,7 +62,7 @@ button {
   display: flex;
   align-items: center;
   justify-content: center;
-  display: none; /* pointer-events: none; */
+  display: none;
   transition: all 0.2s ease;
 }
 .modal-container.show {
@@ -114,8 +114,6 @@ button {
   cursor: pointer;
 }
 
-.listItemDivider {
-}
 .listItemTitle {
   padding: 0;
   margin: 0;
@@ -138,18 +136,4 @@ button {
 }
 .listItem.selected {
   background: lightblue;
-}
-[placeholder]:empty::before {
-  content: "";
-  color: #555;
-  /* background: red; */
-  font-size: 13px;
-}
-
-[placeholder]:empty:focus::before {
-  content: attr(placeholder);
-}
-.quotes {
-  border-left: 3px solid black;
-  padding-left: 1rem;
 }
