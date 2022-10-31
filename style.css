@@ -10,14 +10,12 @@ body {
 #main {
   display: flex;
   flex-direction: column;
-  /* justify-content: center; */
   align-items: flex-start;
   border: 1px solid black;
   height: 100%;
   width: 750px;
 }
 .mainTitle {
-  /* border: solid; */
   width: 100%;
   text-align: center;
 }
@@ -27,15 +25,6 @@ body {
 .inputField {
   background: white;
   margin-bottom: 10px;
-}
-.inputBeforeClick {
-  color: rgb(110, 110, 108);
-  font-size: 14px;
-}
-
-.checkBoxLabel {
-  outline: 0px solid transparent;
-  margin-left: 5px;
 }
 
 /* .modal */
@@ -66,11 +55,9 @@ button {
 }
 .modal {
   background: white;
-  /* same width with input field */
   width: 350px;
   max-width: 100%;
   max-height: 350px;
-  /* padding: 30px 50px; */
   border-radius: 5px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
   display: flex;
@@ -84,15 +71,6 @@ button {
 .modal p {
   opacity: 0.7;
   font-size: 14px;
-}
-.sectionTitle {
-  color: rgba(55, 53, 47, 0.65);
-  font-size: 11px;
-  font-weight: 500;
-  line-height: 120%;
-  user-select: none;
-  text-transform: uppercase;
-  margin-left: 10px;
 }
 
 .listItem {
@@ -110,26 +88,6 @@ button {
   cursor: pointer;
 }
 
-.listItemTitle {
-  padding: 0;
-  margin: 0;
-  font-size: 14px;
-  font-weight: 300;
-}
-.listItemPara {
-  padding: 2px 0 0 0;
-  margin: 0;
-  font-size: 12px !important;
-}
-.icon {
-  margin-right: 12px;
-  margin-left: 5px;
-  width: 46px;
-  height: 46px;
-  border: 1px solid rgb(211, 199, 199);
-  box-shadow: rgb(15 15 15 / 10%) 0px 0px 0px 1px;
-  border-radius: 3px;
-}
 .listItem.selected {
   background: lightblue;
 }

@@ -122,6 +122,24 @@ function getId() {
   currentInputFieldById = id;
 }
 
+// item id is a global variable
+let itemId;
+//for each list item, add an event listener that eventually returns the id of the list item
+//wherever its clicked, the function will look for the appropriate parent element to get the id
+listItems.forEach((item) => {
+  console.log(item);
+  item.addEventListener("click", (e) => {
+    console.log(e.target.id);
+    itemId = e.target.id;
+    console.log(itemId + " is item id");
+    modalItemById = itemId;
+    modal_container.classList.remove("show");
+    createNewElement();
+    inputField = document.querySelectorAll(".inputField");
+    addKeydownFunctionToInputFields();
+  });
+});
+
 //close modal if escape key is clicked
 document.addEventListener("keydown", (e) => {
   if (e.key === "Escape") {
@@ -157,23 +175,6 @@ document.body.addEventListener("click", (e) => {
   }
 });
 
-// item id is a global variable
-let itemId;
-//for each list item, add an event listener that eventually returns the id of the list item
-//wherever its clicked, the function will look for the appropriate parent element to get the id
-listItems.forEach((item) => {
-  console.log(item);
-  item.addEventListener("click", (e) => {
-    console.log(e.target.id);
-    itemId = e.target.id;
-    console.log(itemId + " is item id");
-    modalItemById = itemId;
-    modal_container.classList.remove("show");
-    createNewElement();
-    inputField = document.querySelectorAll(".inputField");
-    addKeydownFunctionToInputFields();
-  });
-});
 //move cursor functionality
 
 let cursorItems = document.querySelectorAll(".listItem");
