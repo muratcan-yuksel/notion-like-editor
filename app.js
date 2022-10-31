@@ -140,13 +140,6 @@ listItems.forEach((item) => {
   });
 });
 
-//close modal if escape key is clicked
-document.addEventListener("keydown", (e) => {
-  if (e.key === "Escape") {
-    modal_container.classList.remove("show");
-  }
-});
-
 //delete input field if backspace is clicked and there is no text in the input field
 function deleteInputField() {
   console.log(currentInputFieldById);
@@ -166,28 +159,17 @@ function deleteInputField() {
   // currentNodeChild.remove();
 }
 
-//close modal if clicked outside of modal
-document.body.addEventListener("click", (e) => {
-  console.log("body");
-  if (e.target != modal) {
-    modal_container.classList.remove("show");
-    modalOpen = false;
-  }
-});
-
 //move cursor functionality
-
-let cursorItems = document.querySelectorAll(".listItem");
 let selectedItem;
 let index = -1;
 
 document.addEventListener("keydown", (e) => {
   if (e.key === "ArrowDown") {
     console.log("down");
-    if (index < cursorItems.length - 1) {
+    if (index < listItems.length - 1) {
       index++;
       console.log(index);
-      selectedItem = cursorItems[index];
+      selectedItem = listItems[index];
       console.log(selectedItem);
       console.log(selectedItem.id);
       modalItemById = selectedItem.id;
@@ -200,7 +182,7 @@ document.addEventListener("keydown", (e) => {
     if (index > 0) {
       index--;
       console.log(index);
-      selectedItem = cursorItems[index];
+      selectedItem = listItems[index];
       console.log(selectedItem);
       console.log(selectedItem.id);
       modalItemById = selectedItem.id;
@@ -208,5 +190,21 @@ document.addEventListener("keydown", (e) => {
       selectedItem.nextElementSibling.classList.remove("selected");
       selectedItem.scrollIntoView({ block: "center", behavior: "smooth" });
     }
+  }
+});
+
+//close modal if escape key is clicked
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape") {
+    modal_container.classList.remove("show");
+  }
+});
+
+//close modal if clicked outside of modal
+document.body.addEventListener("click", (e) => {
+  console.log("body");
+  if (e.target != modal) {
+    modal_container.classList.remove("show");
+    modalOpen = false;
   }
 });
